@@ -17,6 +17,12 @@
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'timeGridWeek',
+                    headerToolbar: { // month view shows multi-day activations as one bar
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,listMonth'
+                    },
+                    buttonText: { month: 'Month', week: 'Week', list: 'List', today: 'Today' },
                     events: '/planned_activations/export',
                     eventClick: function(info) {
                         // Don't let the browser navigate

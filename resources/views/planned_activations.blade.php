@@ -34,6 +34,7 @@
                 <div class="form-group">
                     <label for="band_id">Band:</label>
                     <select class="form-control" id="band_id" name="band_id">
+                        <option value="">All bands</option>
                         @foreach($bands as $band)
                         <option value="{{$band->id}}" {{ $band->start == 14 ? 'selected' : '' }}>{{$band->band}}</option>
                         @endforeach
@@ -45,6 +46,7 @@
                 <div class="form-group">
                     <label for="band_id">Band:</label>
                     <select class="form-control" id="band_id" name="band_id">
+                        <option value="">All bands</option>
                         @foreach($bands as $band)
                         <option value="{{$band->id}}" {{ $band->start == 14 ? 'selected' : '' }}>{{$band->band}}</option>
                         @endforeach
@@ -89,7 +91,7 @@
                         @if($appmode != 'SINGLEOP')
                         <tr>
                             <td colspan="2" style="text-align: center;">
-                                Band: {{ $activation->band == null ? 'unknown' : $activation->band->band }}<br>
+                                Band: {{ $activation->band == null ? 'All bands' : $activation->band->band }}<br>
                                 @if($appmode == 'MULTIOPMODE')
                                 Mode: {{ $activation->mode == null ? 'unknown' : $activation->mode->mode }}
                                 @endif

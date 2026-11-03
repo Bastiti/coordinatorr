@@ -51,9 +51,9 @@ class PlannedActivation extends Model
         //construct title
         $format->title = ( $withcallsign ? ($this->callsign->call . ": ") : '') . $this->activator->call;
 
-        if(($appmode == "MULTIOPBAND" or $appmode == "MULTIOPMODE") and $this->band_id != null)
+        if($appmode == "MULTIOPBAND" or $appmode == "MULTIOPMODE")
         {
-            $format->title = $format->title . " @ " . $this->band->band;
+            $format->title = $format->title . " @ " . ($this->band_id != null ? $this->band->band : "All bands");
         }
 
         if($appmode == "MULTIOPMODE" and $this->mode_id != null)

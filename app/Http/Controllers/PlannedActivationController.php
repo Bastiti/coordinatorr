@@ -65,7 +65,8 @@ class PlannedActivationController extends Controller
         //add new validation rules and error messages depending on app mode
         if($appmode == "MULTIOPBAND" or $appmode == "MULTIOPMODE")
         {
-            $validationrules['band_id'] = 'exists:bands,id';
+            //empty band_id means a reservation for all bands
+            $validationrules['band_id'] = 'nullable|exists:bands,id';
             $errormessages['band_id.exists'] = 'This band does not exist.';
         }
 
@@ -178,8 +179,9 @@ class PlannedActivationController extends Controller
         {
             $start = \Carbon\Carbon::parse( substr($arguments['start'], 0, 10));
             $end = \Carbon\Carbon::parse( substr($arguments['end'], 0, 10));
-            $planned_activations = $planned_activations->where('start', '>=', $start);
-            $planned_activations = $planned_activations->where('end', '<=', $end);
+            //load every activation overlapping the range, so multi-day activations crossing the range borders are included
+            $planned_activations = $planned_activations->where('start', '<', $end);
+            $planned_activations = $planned_activations->where('end', '>', $start);
         }
 
         //get data from database

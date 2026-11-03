@@ -27,13 +27,30 @@ function db4scw_add_mode_constrictions($input, $appmode, $bandid = null, $modeid
             break;
         case 'MULTIOPBAND':
             //add band constriction
-            $input->where('band_id', $bandid);
+            db4scw_add_band_constriction($input, $bandid);
             break;
         case 'MULTIOPMODE':
             //add band and mode  constriction
-            $input->where('band_id', $bandid)->where('mode_id', $modeid);
+            db4scw_add_band_constriction($input, $bandid);
+            $input->where('mode_id', $modeid);
             break;
     }
+
+    return $input;
+}
+
+function db4scw_add_band_constriction($input, $bandid = null)
+{
+    //a null band means "all bands": it collides with every band, so no band constriction
+    if($bandid == null)
+    {
+        return $input;
+    }
+
+    //a specific band collides with the same band and with "all bands" entries
+    $input->where(function ($query) use ($bandid) {
+        $query->where('band_id', $bandid)->orWhereNull('band_id');
+    });
 
     return $input;
 }

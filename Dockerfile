@@ -1,5 +1,5 @@
 # Use the official Apache image as a base
-FROM php:8.3.14-apache
+FROM php:8.3.36-apache
 
 WORKDIR /var/www/html
 

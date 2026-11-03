@@ -1,14 +1,23 @@
-version: '3.8'
 services:
   coordinatorr:
-    image: ghcr.io/DB4SCW/coordinatorr:master
+    image: ghcr.io/f4iey/coordinatorr:master
+    # or build locally (pull: true fetches the newest PHP patch release):
+    # build:
+    #   context: .
+    #   pull: true
     container_name: coordinatorr
     ports:
-      - "8073:80"
+      - "8073:8080"
+    # copy .env.example to coordinatorr.env and set at least APP_KEY,
+    # ADMIN_PANEL_SECRET (the default is refused), APP_ENV=production, APP_DEBUG=false
+    env_file: coordinatorr.env
     volumes:
-      - PATH_TO_ENV_FILE/.env:/var/www/coordinatorr/.env # Bind mount for .env
-      - coordinatorr_db:/var/www/coordinatorr/database # volume database directory (optional)
-    environment:
-      APACHE_RUN_USER: www-data
-      APACHE_RUN_GROUP: www-data
+      - coordinatorr_data:/data # SQLite database
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     restart: unless-stopped
+
+volumes:
+  coordinatorr_data:

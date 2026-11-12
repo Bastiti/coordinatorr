@@ -3,7 +3,7 @@
 
     <x-slot name="slot">
         <div class="container mt-5">
-            <form action="/add_activation" method="post">
+            <form action="/add_activation" method="post" class="panel">
                 @csrf
                 <div class="form-group">
                     <label for="eventcallsignid">Event Callsign:</label>
@@ -111,7 +111,7 @@
         </div>
         @endif
         <h3 class="text-center mb-4" style="margin-top: 30px;">Planned activations:</h3>
-        <div class="container" style="margin-bottom: 80px;">
+        <div class="container section" style="margin-bottom: 80px;">
             <x-calendar />
         </div>
         <!-- Modal dialog to confirm ending of activation -->

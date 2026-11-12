@@ -4,7 +4,7 @@
     <x-slot name="slot">
         <div class="container mt-5">
             <h3 class="text-center mb-4">Planned Activation:</h3>
-            <form action="/add_planned_activation" method="post">
+            <form action="/add_planned_activation" method="post" class="panel">
                 @csrf
                 <div class="form-group">
                     <label for="eventcallsignid">Event Callsign:</label>

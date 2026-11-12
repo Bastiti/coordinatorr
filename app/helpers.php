@@ -229,3 +229,17 @@ function db4scw_has_activator_access() : bool
 
     return hash_equals(db4scw_activator_access_token(), (string) request()->cookie('coordinatorr_access'));
 }
+
+function db4scw_get_theme() : string
+{
+    //only allow themes that have a stylesheet in public/css
+    $theme = (string) config('app.db4scw_theme');
+
+    return in_array($theme, ['christmas']) ? $theme : 'default';
+}
+
+function db4scw_asset(string $path) : string
+{
+    //append the file modification time, so browsers reload changed files
+    return '/' . $path . '?v=' . @filemtime(public_path($path));
+}

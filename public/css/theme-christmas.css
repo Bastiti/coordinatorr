@@ -1,0 +1,228 @@
+/*
+ * Coordinatorr Christmas theme (COORDINATORR_THEME=christmas)
+ *
+ * Night sky over pine trees, berry red, pine green and gold accents,
+ * string lights under the navbar, snow on the footer and falling snow
+ * (public/js/snow.js).
+ */
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("../fonts/fraunces-latin-wght-normal.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fraunces";
+    src: url("../fonts/fraunces-latin-wght-italic.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+html.theme-christmas {
+    color-scheme: dark;
+
+    --red: #d63a49;
+    --red-dark: #a8202f;
+    --pine: #2f9e63;
+    --gold: #e9b949;
+    --snow: #f7f2e8;
+
+    --page-bg: #0a1620;
+    --page-bg-image:
+        radial-gradient(1100px 560px at 12% -8%, rgba(56, 130, 104, 0.30), transparent 60%),
+        radial-gradient(900px 480px at 100% 0%, rgba(214, 58, 73, 0.16), transparent 60%),
+        linear-gradient(180deg, #0a1620 0%, #0c211d 55%, #0e2a22 100%);
+    --text: var(--snow);
+    --muted: #b3c2ba;
+    --label: var(--muted);
+    --accent: var(--red);
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+    --surface: rgba(255, 255, 255, 0.055);
+    --surface-border: rgba(255, 255, 255, 0.11);
+    --surface-blur: blur(10px);
+
+    --nav-h: 88px;
+    --nav-bg: rgba(8, 20, 24, 0.78);
+    --nav-blur: blur(12px);
+    --nav-link: var(--snow);
+    --footer-bg: linear-gradient(180deg, #a8202f, #7c1522);
+    --footer-link: var(--snow);
+
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --input-text: var(--snow);
+    --input-border: rgba(255, 255, 255, 0.16);
+    --input-placeholder: rgba(247, 242, 232, 0.45);
+    --input-option-bg: #10241f;
+    --input-option-text: var(--snow);
+
+    --btn-primary-bg: linear-gradient(180deg, #df4655, #b42636);
+    --btn-primary-text: #fff;
+    --btn-primary-shadow: rgba(214, 58, 73, 0.35);
+    --focus: rgba(233, 185, 73, 0.45);
+
+    --danger: #ef5466;
+    --success: var(--pine);
+    --warning: var(--gold);
+
+    --table-bg: transparent;
+    --table-head-bg: rgba(255, 255, 255, 0.04);
+    --table-border: rgba(255, 255, 255, 0.09);
+    --heading-rule: repeating-linear-gradient(-45deg, var(--red) 0 6px, var(--snow) 6px 12px);
+
+    --modal-header-bg: #13292a;
+    --modal-body-bg: #0f2023;
+    --toast-bg: rgba(12, 28, 30, 0.96);
+    --notice-bg: rgba(233, 185, 73, 0.10);
+    --notice-border: rgba(233, 185, 73, 0.35);
+    --notice-link: #f2cd6b;
+
+    --fc-today: rgba(233, 185, 73, 0.12);
+    --fc-event: var(--red);
+}
+
+.theme-christmas .navbar-brand {
+    font-style: italic;
+    font-weight: 600;
+}
+
+.theme-christmas h1,
+.theme-christmas h3 {
+    font-weight: 600;
+}
+
+.theme-christmas .navbar-link.active {
+    background: rgba(214, 58, 73, 0.30);
+}
+
+/* Buttons */
+.theme-christmas .btn-danger {
+    color: #ff9aa5;
+    background: transparent;
+    border: 1px solid rgba(239, 84, 102, 0.6);
+}
+
+.theme-christmas .btn-danger:hover,
+.theme-christmas .btn-danger:focus {
+    color: #fff;
+    background: rgba(239, 84, 102, 0.18);
+}
+
+.theme-christmas .btn-success {
+    color: #fff;
+    background: var(--pine);
+    border-color: transparent;
+}
+
+.theme-christmas .btn-warning {
+    color: #241a04;
+    background: var(--gold);
+    border-color: transparent;
+}
+
+.theme-christmas .btn-secondary {
+    color: var(--snow);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+}
+
+.theme-christmas .text-danger {
+    color: var(--danger) !important;
+}
+
+/* Calendar */
+.theme-christmas #calendar .fc-list-day-cushion {
+    color: var(--gold);
+}
+
+/* Falling snow (drawn by public/js/snow.js) */
+#snow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* String lights hanging below the navbar */
+.xmas-lights {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 24px;
+    margin-top: -1px;
+    overflow: hidden;
+    pointer-events: none;
+    /* sagging wire, one arc per bulb */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='10'%3E%3Cpath d='M0 1 Q20 9 40 1' fill='none' stroke='%23314a40' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x;
+}
+
+.xmas-lights span {
+    position: relative;
+    flex: 0 0 40px;
+    height: 24px;
+}
+
+/* socket */
+.xmas-lights span::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 17px;
+    width: 6px;
+    height: 5px;
+    border-radius: 1px;
+    background: #2b3a34;
+}
+
+/* bulb */
+.xmas-lights span::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 15.5px;
+    width: 9px;
+    height: 14px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    background: var(--bulb);
+    box-shadow: 0 0 10px 2px var(--bulb);
+    animation: twinkle 2.4s ease-in-out infinite alternate;
+}
+
+.xmas-lights span:nth-child(4n+1) { --bulb: #ff4d5e; }
+.xmas-lights span:nth-child(4n+2) { --bulb: #ffd166; }
+.xmas-lights span:nth-child(4n+3) { --bulb: #4ade80; }
+.xmas-lights span:nth-child(4n+4) { --bulb: #60a5fa; }
+
+.xmas-lights span:nth-child(3n+1)::after { animation-duration: 1.9s; }
+.xmas-lights span:nth-child(3n+2)::after { animation-duration: 2.7s; animation-delay: -1.1s; }
+.xmas-lights span:nth-child(3n+3)::after { animation-duration: 3.3s; animation-delay: -2.2s; }
+
+@keyframes twinkle {
+    from { opacity: 0.45; box-shadow: 0 0 2px 0 var(--bulb); }
+    to { opacity: 1; box-shadow: 0 0 12px 3px var(--bulb); }
+}
+
+/* Snow resting on the footer */
+.theme-christmas .footer::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: radial-gradient(circle at 10px 10px, var(--snow) 9px, transparent 9.5px) repeat-x;
+    background-size: 20px 10px;
+}
+
+.brand-tree {
+    flex: none;
+    filter: drop-shadow(0 0 6px rgba(233, 185, 73, 0.35));
+}

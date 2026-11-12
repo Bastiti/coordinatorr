@@ -5,7 +5,7 @@
         <div class="container mt-5">
             <h1>Event access code:</h1>
             <p>Logging, ending, planning and deleting activations requires the event access code. Ask the event coordinator if you don't have it.</p>
-            <form action="/access" method="post">
+            <form action="/access" method="post" class="panel">
                 @csrf
                 <div class="form-group">
                     <label for="access_code">Access code:</label>

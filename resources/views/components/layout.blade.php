@@ -1,5 +1,6 @@
+@php($theme = db4scw_get_theme())
 <!DOCTYPE html>
-<html>
+<html lang="en" class="theme-{{ $theme }}">
     <head>
         <title>{{ $title ?? '' }}</title>
         <meta charset="utf-8">
@@ -18,114 +19,70 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
         
+        <!-- Colors from .env, used by the stylesheets below -->
         <style>
-            /* Custom CSS for dark mode */
-            body {
-                background-color: {{ config('app.db4scw_page_background_color') }};
-                color: {{ config('app.db4scw_body_text_color') }};
-            }
-            .container {
-                max-width: 1080px;
-            }
-            .admincontainer {
-                max-width: 2000px;
-            }
-            .table {
-                background-color: {{ config('app.db4scw_table_background_color') }}; 
-            }
-            .btn-primary {
-                background-color: {{ config('app.db4scw_accent_background_color') }};
-                border-color: {{ config('app.db4scw_accent_background_color') }};
-                color: {{ config('app.db4scw_body_text_color') }};
-            }
-            .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-                color: {{ config('app.db4scw_body_text_color') }};
-                background-color: {{ config('app.db4scw_accent_background_color') }};
-                border-color: {{ config('app.db4scw_accent_background_color') }};
-            }
-            .modal-content {
-                background-color: {{ config('app.db4scw_modal_body_background_color') }};
-                color: {{ config('app.db4scw_body_text_color') }};
-            }
-            .modal-header {
-                background-color: {{ config('app.db4scw_modal_header_background_color') }};
-                color: {{ config('app.db4scw_body_text_color') }};
-            }
-            .modal-footer {
-                background-color: {{ config('app.db4scw_modal_body_background_color') }};
-                color: {{ config('app.db4scw_body_text_color') }};
-            }
-            .custom-navbar {
-                background-color: {{ config('app.db4scw_accent_background_color') }};
-            }
-            .navbar-element {
-                display: flex; 
-                justify-content: flex-end;
-            }
-            .navbar-link {
-                color: {{ config('app.db4scw_navbar_link_text_color') }};
-            }
-            .bottom-right-alert {
-                position: fixed;
-                bottom: 40px;
-                right: 20px;
-                z-index: 9999;
-            }
-            .top-left-alert {
-                position: fixed;
-                top: 60px;
-                left: 20px;
-                z-index: 9999;
-            }
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: {{ config('app.db4scw_accent_background_color') }};
-                padding: 10px;
-                text-align: center;
-                display: flex; 
-                justify-content: center;
-            }
-            .footerelement {
-                margin-left: 10px;
-                color: white;
-            }
-            .section {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                padding: 20px;
-                background-color: {{ config('app.db4scw_content_background_color') }};
-                border-radius: 10px;
+            :root {
+                --page-bg: {{ config('app.db4scw_page_background_color') }};
+                --accent: {{ config('app.db4scw_accent_background_color') }};
+                --table-bg: {{ config('app.db4scw_table_background_color') }};
+                --text: {{ config('app.db4scw_body_text_color') }};
+                --modal-header-bg: {{ config('app.db4scw_modal_header_background_color') }};
+                --modal-body-bg: {{ config('app.db4scw_modal_body_background_color') }};
+                --nav-link: {{ config('app.db4scw_navbar_link_text_color') }};
+                --section-bg: {{ rtrim(config('app.db4scw_content_background_color'), '; ') }};
             }
         </style>
+        <link href="{{ db4scw_asset('css/coordinatorr.css') }}" rel="stylesheet">
+        @if($theme != 'default')
+        <link href="{{ db4scw_asset('css/theme-' . $theme . '.css') }}" rel="stylesheet">
+        @endif
         <!-- On demand CSS -->
         {{ $styles ?? '' }}
     </head>
     <body>
+        @if($theme == 'christmas')
+        <canvas id="snow" aria-hidden="true"></canvas>
+        @endif
+
          <!-- Floating Navbar -->
-        <nav class="navbar fixed-top navbar-dark custom-navbar"  style="display: flex;">
-            <a class="navbar-brand" href="/" style="color: {{ config('app.db4scw_body_text_color') }};">Coordinatorr</a>
-            
+        <nav class="navbar fixed-top navbar-dark custom-navbar">
+            <a class="navbar-brand" href="/">
+                @if($theme == 'christmas')
+                <svg class="brand-tree" viewBox="0 0 24 28" width="26" height="30" aria-hidden="true">
+                    <polygon points="12,4 20,13.5 16.2,13.5 22,21 2,21 7.8,13.5 4,13.5" fill="#2f9e63"/>
+                    <rect x="10.5" y="21" width="3" height="4" rx="0.6" fill="#8b5a2b"/>
+                    <polygon points="12,0 13.2,2.6 16,2.9 13.9,4.8 14.5,7.6 12,6.2 9.5,7.6 10.1,4.8 8,2.9 10.8,2.6" fill="#e9b949"/>
+                    <circle cx="10" cy="11.5" r="1.1" fill="#ef5466"/>
+                    <circle cx="14.5" cy="16.5" r="1.1" fill="#e9b949"/>
+                    <circle cx="8.5" cy="18.5" r="1.1" fill="#60a5fa"/>
+                    <circle cx="13.5" cy="9" r="0.9" fill="#f7f2e8"/>
+                </svg>
+                @endif
+                Coordinatorr
+            </a>
+
             <div class="navbar-element">
                 @if(auth()->check())
-                <a class="nav-link navbar-link" href="/admin">Adminpanel</a>
-                <a class="nav-link navbar-link" href="/activations/open">Open Activations</a>
-                <form method="post" action="/logout" style="display: inline;">
+                <a class="nav-link navbar-link {{ request()->is('admin') ? 'active' : '' }}" href="/admin">Adminpanel</a>
+                <a class="nav-link navbar-link {{ request()->is('activations/open') ? 'active' : '' }}" href="/activations/open">Open Activations</a>
+                <form method="post" action="/logout" class="d-inline">
                     @csrf
-                    <button type="submit" class="nav-link navbar-link" style="background: none; border: 0; cursor: pointer;">Logout</button>
+                    <button type="submit" class="nav-link navbar-link">Logout</button>
                 </form>
                 @endif
-                <a class="nav-link navbar-link" href="/planned_activations">Planned Activations</a>
+                <a class="nav-link navbar-link {{ request()->is('planned_activations*') ? 'active' : '' }}" href="/planned_activations">Planned Activations</a>
             </div>
+
+            @if($theme == 'christmas')
+            <div class="xmas-lights" aria-hidden="true">@for($i = 0; $i < 64; $i++)<span></span>@endfor</div>
+            @endif
         </nav>
-        <br>
-        
+
         @if(!db4scw_has_activator_access() and !request()->routeIs('access'))
-        <div class="container mt-5" style="margin-bottom: -2rem;">
-            <div class="alert alert-info" style="text-align: center;">
-                Read-only mode. <a href="/access">Enter the event access code</a> to log or plan activations.
+        <div class="container mt-4">
+            <div class="notice">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <span>Read-only mode. <a href="/access">Enter the event access code</a> to log or plan activations.</span>
             </div>
         </div>
         @endif
@@ -178,6 +135,10 @@
 
         <!-- On demand JS -->
         {{ $scripts ?? '' }}
+
+        @if($theme == 'christmas')
+        <script src="{{ db4scw_asset('js/snow.js') }}" defer></script>
+        @endif
 
         <!-- Alert-JS -->
         <script type="text/javascript">

@@ -5,7 +5,9 @@
         <div class="container mt-5">
             <h1>Calendar:</h1>
             <div style="text-align: center"><a href="/planned_activations"><button class="btn btn-primary">Back to planned activations</button></a></div>
-            <x-calendar />
+            <div class="section">
+                <x-calendar />
+            </div>
         </div>
 
         <div style="margin-bottom: 80px;">

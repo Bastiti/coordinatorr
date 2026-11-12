@@ -5,7 +5,7 @@
         @if($activations->count() > 0)
         <h3 class="text-center mb-4" style="margin-top: 50px;">Activations without logs:</h3>
         <div style="margin-bottom: 80px;">
-            <div class="container mt-5 section" style="background-color: rgba(255, 255, 255, 0.5);">
+            <div class="container mt-5 section">
                 <table class="table table-bordered table-hover table-dark" style="margin-bottom: 5px;">
                     <thead class="thead-light">
                         <tr>

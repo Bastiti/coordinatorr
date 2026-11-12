@@ -3,7 +3,7 @@
 
     <x-slot name="slot">
         <div class="container mt-5" style="margin-top: 50px;">
-            <form action="/admin/add_activator" method="post">
+            <form action="/admin/add_activator" method="post" class="panel">
                 @csrf
                 <div class="form-group">
                     <label for="activator_callsign">Activator:</label>
@@ -15,7 +15,7 @@
             </form>
         </div>
         <div class="container mt-5">
-            <form action="/admin/add_callsign" method="post">
+            <form action="/admin/add_callsign" method="post" class="panel">
                 @csrf
                 <div class="form-group">
                     <label for="event_callsign">Eventcallsign:</label>
@@ -29,10 +29,10 @@
         <h3 class="text-center mb-4" style="margin-top: 30px;">Coordinatorr mode:</h3>
         <div style="margin-bottom: 80px;">
             <div class="container mt-5">
-                <form action="/admin/switch_mode" method="post">
+                <form action="/admin/switch_mode" method="post" class="panel">
                     @csrf
                     <div class="form-group">
-                        <label for="mode" style="color:red;">DANGER: Changing this will delete all current activations and upcoming planned activations!</label>
+                        <label for="mode" class="text-danger">DANGER: Changing this will delete all current activations and upcoming planned activations!</label>
                         <select class="form-control" name="mode">
                             @foreach ($modes as $mode)
                             <option value="{{ $mode->option }}" {{ $current_appmode == $mode->option ? 'selected' : '' }}>{{ $mode->option }} -> {{ $mode->description }}</option>    
@@ -47,7 +47,7 @@
         </div>
         <h3 class="text-center mb-4" style="margin-top: 30px;">Activators:</h3>
         <div style="margin-bottom: 80px;">
-            <div class="container mt-5 section" style="background-color: rgba(255, 255, 255, 0.5);">
+            <div class="container mt-5 section">
                 <table class="table table-bordered table-hover table-dark" style="margin-bottom: 5px;">
                     <thead class="thead-light">
                         <tr>
@@ -84,7 +84,7 @@
         </div>
         <h3 class="text-center mb-4" style="margin-top: 30px;">Eventcalls:</h3>
         <div style="margin-bottom: 80px;">
-            <div class="container mt-5 section" style="background-color: rgba(255, 255, 255, 0.5);">
+            <div class="container mt-5 section">
                 <table class="table table-bordered table-hover table-dark" style="margin-bottom: 5px;">
                     <thead class="thead-light">
                         <tr>

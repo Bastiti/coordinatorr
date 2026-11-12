@@ -207,3 +207,25 @@ function db4scw_checklatestGithubRelease(string $owner, string $repo, string $cu
     ];
 
 }
+function db4scw_activator_access_token() : string
+{
+    //token stored in the access cookie, changes when the access code changes
+    return hash_hmac('sha256', (string) config('app.db4scw_activator_access_code'), (string) config('app.key'));
+}
+
+function db4scw_has_activator_access() : bool
+{
+    //no access code configured: everybody may change activations
+    if((string) config('app.db4scw_activator_access_code') == '')
+    {
+        return true;
+    }
+
+    //admin always has access
+    if(auth()->check())
+    {
+        return true;
+    }
+
+    return hash_equals(db4scw_activator_access_token(), (string) request()->cookie('coordinatorr_access'));
+}

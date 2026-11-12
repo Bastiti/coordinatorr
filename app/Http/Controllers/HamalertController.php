@@ -13,6 +13,14 @@ class HamalertController extends Controller
 {
     public function receive()
     {
+        //if a secret is configured, only accept spots sent to /hamalertreceiver?token=<secret>
+        $secret = (string) config('app.db4scw_hamalert_secret');
+
+        if($secret != '' and !hash_equals($secret, (string) request()->query('token')))
+        {
+            return response()->json(['message' => 'Invalid token.'], 403);
+        }
+
         //get appmode
         $appmode = db4scw_get_current_appmode();
         

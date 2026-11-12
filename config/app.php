@@ -220,5 +220,6 @@ return [
     'db4scw_end_functions_javascript' => env('END_ACTIVATIONS_USE_JAVASCRIPT', false),
     'db4scw_trusted_proxies' => env('TRUSTED_PROXIES', ''),
     'db4scw_activator_access_code' => env('ACTIVATOR_ACCESS_CODE', ''),
+    'db4scw_hamalert_secret' => env('HAMALERT_SECRET', ''),
 
 ];

@@ -25,4 +25,20 @@ class TrustProxies extends Middleware
         Request::HEADER_X_FORWARDED_PORT |
         Request::HEADER_X_FORWARDED_PROTO |
         Request::HEADER_X_FORWARDED_AWS_ELB;
+
+    /**
+     * Get the trusted proxies from the TRUSTED_PROXIES setting (comma separated IPs or CIDR ranges).
+     *
+     * @return array<int, string>|string|null
+     */
+    protected function proxies()
+    {
+        $proxies = trim((string) config('app.db4scw_trusted_proxies'));
+
+        if ($proxies === '') {
+            return $this->proxies;
+        }
+
+        return $proxies === '*' ? '*' : array_map('trim', explode(',', $proxies));
+    }
 }

@@ -218,5 +218,6 @@ return [
     'db4scw_check_reservations_advance_hours' => env("COORDINATORR_CHECK_RESERVATIONS_IN_ADVANCE_HOURS", 4),
     'db4scw_adminpanel_secret' => env('ADMIN_PANEL_SECRET', 'simsalabim'),
     'db4scw_end_functions_javascript' => env('END_ACTIVATIONS_USE_JAVASCRIPT', false),
+    'db4scw_trusted_proxies' => env('TRUSTED_PROXIES', ''),
 
 ];

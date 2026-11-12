@@ -48,6 +48,8 @@ RUN a2enmod rewrite headers \
         'Header always set X-Content-Type-Options "nosniff"' \
         'Header always set X-Frame-Options "SAMEORIGIN"' \
         'Header always set Referrer-Policy "strict-origin-when-cross-origin"' \
+        'Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"' \
+        "Header always set Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com https://cdn.jsdelivr.net; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'\"" \
         > /etc/apache2/conf-available/zz-hardening.conf \
     && a2enconf zz-hardening
 

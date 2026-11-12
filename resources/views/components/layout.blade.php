@@ -40,26 +40,9 @@
         {{ $styles ?? '' }}
     </head>
     <body>
-        @if($theme == 'christmas')
-        <canvas id="snow" aria-hidden="true"></canvas>
-        @endif
-
          <!-- Floating Navbar -->
         <nav class="navbar fixed-top navbar-dark custom-navbar">
-            <a class="navbar-brand" href="/">
-                @if($theme == 'christmas')
-                <svg class="brand-tree" viewBox="0 0 24 28" width="26" height="30" aria-hidden="true">
-                    <polygon points="12,4 20,13.5 16.2,13.5 22,21 2,21 7.8,13.5 4,13.5" fill="#2f9e63"/>
-                    <rect x="10.5" y="21" width="3" height="4" rx="0.6" fill="#8b5a2b"/>
-                    <polygon points="12,0 13.2,2.6 16,2.9 13.9,4.8 14.5,7.6 12,6.2 9.5,7.6 10.1,4.8 8,2.9 10.8,2.6" fill="#e9b949"/>
-                    <circle cx="10" cy="11.5" r="1.1" fill="#ef5466"/>
-                    <circle cx="14.5" cy="16.5" r="1.1" fill="#e9b949"/>
-                    <circle cx="8.5" cy="18.5" r="1.1" fill="#60a5fa"/>
-                    <circle cx="13.5" cy="9" r="0.9" fill="#f7f2e8"/>
-                </svg>
-                @endif
-                Coordinatorr
-            </a>
+            <a class="navbar-brand" href="/">Coordinatorr</a>
 
             <div class="navbar-element">
                 @if(auth()->check())
@@ -81,8 +64,7 @@
         @if(!db4scw_has_activator_access() and !request()->routeIs('access'))
         <div class="container mt-4">
             <div class="notice">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                <span>Read-only mode. <a href="/access">Enter the event access code</a> to log or plan activations.</span>
+                Read-only mode. <a href="/access">Enter the event access code</a> to log or plan activations.
             </div>
         </div>
         @endif
@@ -135,10 +117,6 @@
 
         <!-- On demand JS -->
         {{ $scripts ?? '' }}
-
-        @if($theme == 'christmas')
-        <script src="{{ db4scw_asset('js/snow.js') }}" defer></script>
-        @endif
 
         <!-- Alert-JS -->
         <script type="text/javascript">

@@ -6,30 +6,19 @@
  * stylesheet (e.g. theme-christmas.css) may override any of them.
  */
 
-@font-face {
-    font-family: "Inter";
-    src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
 :root {
-    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-display: var(--font-body);
-    --radius: 16px;
-    --radius-sm: 10px;
-    --shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    --radius: 10px;
+    --radius-sm: 6px;
 
-    --page-bg-image: none;
-    --muted: color-mix(in srgb, var(--text) 68%, transparent);
+    --muted: color-mix(in srgb, var(--text) 70%, transparent);
     --surface: var(--section-bg);
     --surface-border: rgba(255, 255, 255, 0.08);
-    --surface-blur: none;
 
-    --nav-h: 64px;
+    --nav-h: 60px;
     --nav-bg: var(--accent);
-    --nav-blur: none;
+    --nav-border: transparent;
     --footer-bg: var(--accent);
     --footer-link: #fff;
 
@@ -41,9 +30,9 @@
     --input-option-text: #212529;
 
     --btn-primary-bg: var(--accent);
+    --btn-primary-hover: var(--accent);
     --btn-primary-text: var(--text);
-    --btn-primary-shadow: rgba(0, 0, 0, 0.25);
-    --focus: color-mix(in srgb, var(--accent) 45%, transparent);
+    --focus: var(--accent);
 
     --danger: #dc3545;
     --success: #28a745;
@@ -52,12 +41,11 @@
 
     --table-head-bg: rgba(0, 0, 0, 0.2);
     --table-border: rgba(255, 255, 255, 0.1);
-    --heading-rule: var(--accent);
 
     --toast-bg: #1f2329;
     --notice-bg: rgba(23, 162, 184, 0.15);
     --notice-border: rgba(23, 162, 184, 0.45);
-    --notice-link: #7fd8e8;
+    --link: #8fd3e0;
 
     --fc-today: rgba(255, 220, 40, 0.12);
     --fc-event: #3788d8;
@@ -65,20 +53,16 @@
 
 /* Page */
 html {
-    background-color: var(--page-bg);
-    background-image: var(--page-bg-image);
-    background-attachment: fixed;
     min-height: 100%;
+    background-color: var(--page-bg);
 }
 
 body {
-    /* transparent so decorations behind the content (z-index -1) stay visible */
     background: transparent;
     color: var(--text);
     font-family: var(--font-body);
     padding-top: var(--nav-h);
     padding-bottom: 72px;
-    -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -91,22 +75,11 @@ body {
 
 h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-}
-
-h3.text-center::after {
-    content: "";
-    display: block;
-    width: 64px;
-    height: 5px;
-    margin: 0.7rem auto 0;
-    border-radius: 5px;
-    background: var(--heading-rule);
+    font-weight: 600;
 }
 
 a {
-    color: var(--notice-link);
+    color: var(--link);
 }
 
 /* Navbar */
@@ -115,18 +88,12 @@ a {
     flex-wrap: nowrap;
     padding: 0.5rem 1rem;
     background: var(--nav-bg);
-    backdrop-filter: var(--nav-blur);
-    -webkit-backdrop-filter: var(--nav-blur);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid var(--nav-border);
 }
 
 .navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.35rem;
+    font-weight: 600;
     color: var(--text) !important;
 }
 
@@ -135,7 +102,6 @@ a {
     /* flex-start keeps overflowing links scrollable on phones, margin pushes them right */
     justify-content: flex-start;
     margin-left: auto;
-    gap: 0.25rem;
     min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
@@ -147,11 +113,7 @@ a {
 
 .navbar-link {
     color: var(--nav-link) !important;
-    padding: 0.45rem 0.9rem !important;
-    border-radius: 999px;
-    font-weight: 500;
     white-space: nowrap;
-    transition: background-color 0.15s;
 }
 
 button.navbar-link {
@@ -162,26 +124,19 @@ button.navbar-link {
 }
 
 .navbar-link:hover,
-.navbar-link:focus {
-    background: rgba(255, 255, 255, 0.12);
-    text-decoration: none;
-    outline: none;
-}
-
 .navbar-link.active {
-    background: rgba(255, 255, 255, 0.18);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
 }
 
 /* Cards */
 .section,
 .panel {
-    padding: 1.5rem;
+    padding: 1.25rem;
     background: var(--surface);
     border: 1px solid var(--surface-border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    backdrop-filter: var(--surface-blur);
-    -webkit-backdrop-filter: var(--surface-blur);
 }
 
 .section {
@@ -190,7 +145,7 @@ button.navbar-link {
 }
 
 .section table + div {
-    margin-top: 0.9rem;
+    margin-top: 0.75rem;
 }
 
 .container > h1 {
@@ -199,47 +154,36 @@ button.navbar-link {
 }
 
 .notice {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    padding: 0.75rem 1.1rem;
+    padding: 0.75rem 1rem;
     text-align: center;
-    color: var(--text);
     background: var(--notice-bg);
     border: 1px solid var(--notice-border);
     border-radius: var(--radius);
 }
 
 .notice a {
-    color: var(--notice-link);
     font-weight: 600;
 }
 
 /* Forms */
 label {
-    margin-bottom: 0.35rem;
-    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
     font-weight: 600;
     color: var(--label, var(--text));
 }
 
 .form-control {
-    height: calc(1.5em + 1.1rem + 2px);
-    padding: 0.55rem 0.9rem;
     color: var(--input-text);
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
     border-radius: var(--radius-sm);
-    transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .form-control:focus {
     color: var(--input-text);
     background-color: var(--input-bg);
-    border-color: var(--accent);
-    box-shadow: 0 0 0 0.2rem var(--focus);
+    border-color: var(--focus);
+    box-shadow: 0 0 0 1px var(--focus);
 }
 
 .form-control::placeholder {
@@ -253,49 +197,40 @@ select.form-control option {
 
 /* Buttons */
 .btn {
-    padding: 0.55rem 1.3rem;
     font-weight: 600;
-    border-radius: 999px;
-    transition: transform 0.12s, box-shadow 0.15s, background-color 0.15s, filter 0.15s;
-}
-
-.btn:active {
-    transform: translateY(1px);
+    border-radius: var(--radius-sm);
 }
 
 .btn-primary,
-.btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
 .btn-primary:not(:disabled):not(.disabled):active {
     color: var(--btn-primary-text);
     background: var(--btn-primary-bg);
-    border-color: transparent;
-    box-shadow: 0 6px 18px var(--btn-primary-shadow);
+    border-color: var(--btn-primary-bg);
 }
 
 .btn-primary:hover {
-    filter: brightness(1.08);
+    color: var(--btn-primary-text);
+    background: var(--btn-primary-hover);
+    border-color: var(--btn-primary-hover);
 }
 
-.btn:focus:not(:focus-visible) {
+.btn:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
     box-shadow: none;
 }
 
 .btn:focus-visible {
-    box-shadow: 0 0 0 0.2rem var(--focus);
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
 }
 
 /* Tables */
 .table {
     margin-bottom: 0 !important;
     color: var(--text);
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid var(--table-border) !important;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
 }
 
 .table-dark {
@@ -303,36 +238,21 @@ select.form-control option {
     background-color: var(--table-bg);
 }
 
-.table td,
-.table th,
+.table-bordered,
 .table-bordered td,
 .table-bordered th,
 .table-dark td,
 .table-dark th,
-.table-dark thead th {
-    padding: 0.75rem 1rem;
+.table-dark thead th,
+.table .thead-light th {
     vertical-align: middle;
-    border: 0;
-    border-top: 1px solid var(--table-border);
-}
-
-.table td + td,
-.table th + th {
-    border-left: 1px solid var(--table-border);
-}
-
-.table thead tr:first-child th {
-    border-top: 0;
+    border-color: var(--table-border);
 }
 
 .table .thead-light th {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-weight: 600;
     color: var(--muted);
     background: var(--table-head-bg);
-    border-color: var(--table-border);
 }
 
 .table-hover tbody tr:hover,
@@ -347,8 +267,6 @@ select.form-control option {
     background: var(--modal-body-bg);
     border: 1px solid var(--surface-border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
 }
 
 .modal-header {
@@ -368,7 +286,7 @@ select.form-control option {
     text-shadow: none;
 }
 
-/* Alerts as toasts */
+/* Alerts */
 .bottom-right-alert,
 .top-left-alert {
     position: fixed;
@@ -378,7 +296,7 @@ select.form-control option {
 
 .bottom-right-alert {
     right: 20px;
-    bottom: 76px;
+    bottom: 60px;
 }
 
 .top-left-alert {
@@ -392,9 +310,7 @@ select.form-control option {
     background: var(--toast-bg);
     border: 1px solid var(--surface-border);
     border-left: 4px solid var(--info);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    animation: toast-in 0.35s ease-out;
+    border-radius: var(--radius-sm);
 }
 
 .alert-danger { border-left-color: var(--danger) !important; }
@@ -402,13 +318,7 @@ select.form-control option {
 .alert-success { border-left-color: var(--success) !important; }
 
 .alert a {
-    color: var(--notice-link);
-    font-weight: 600;
-}
-
-@keyframes toast-in {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: none; }
+    color: var(--link);
 }
 
 /* Footer */
@@ -422,38 +332,32 @@ select.form-control option {
     flex-wrap: wrap;
     gap: 0.25rem 1.25rem;
     width: 100%;
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
     background: var(--footer-bg);
 }
 
-.footerelement {
-    color: var(--footer-link);
-    opacity: 0.9;
-}
-
+.footerelement,
 .footerelement:hover {
     color: var(--footer-link);
-    opacity: 1;
 }
 
 /* FullCalendar (ids beat the styles FullCalendar injects at runtime) */
 #calendar {
     --fc-border-color: var(--table-border);
     --fc-page-bg-color: transparent;
-    --fc-neutral-bg-color: rgba(255, 255, 255, 0.05);
-    --fc-list-event-hover-bg-color: rgba(255, 255, 255, 0.06);
+    --fc-neutral-bg-color: var(--table-head-bg);
+    --fc-list-event-hover-bg-color: rgba(255, 255, 255, 0.05);
     --fc-today-bg-color: var(--fc-today);
     --fc-event-bg-color: var(--fc-event);
     --fc-event-border-color: var(--fc-event);
     --fc-button-text-color: var(--text);
-    --fc-button-bg-color: rgba(255, 255, 255, 0.08);
-    --fc-button-border-color: transparent;
-    --fc-button-hover-bg-color: rgba(255, 255, 255, 0.16);
-    --fc-button-hover-border-color: transparent;
+    --fc-button-bg-color: transparent;
+    --fc-button-border-color: var(--surface-border);
+    --fc-button-hover-bg-color: rgba(255, 255, 255, 0.08);
+    --fc-button-hover-border-color: var(--surface-border);
     --fc-button-active-bg-color: var(--accent);
-    --fc-button-active-border-color: transparent;
+    --fc-button-active-border-color: var(--accent);
 }
 
 #calendar a {
@@ -462,13 +366,11 @@ select.form-control option {
 
 #calendar .fc-toolbar-title {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 #calendar .fc-button {
-    font-weight: 600;
     text-transform: none;
-    box-shadow: none;
 }
 
 #calendar .fc-button:focus {
@@ -476,30 +378,11 @@ select.form-control option {
 }
 
 #calendar .fc-button:focus-visible {
-    box-shadow: 0 0 0 0.2rem var(--focus);
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
 }
 
-#calendar .fc-button-group > .fc-button:first-child,
-#calendar .fc-toolbar-chunk > .fc-button {
-    border-top-left-radius: 999px;
-    border-bottom-left-radius: 999px;
-}
-
-#calendar .fc-button-group > .fc-button:last-child,
-#calendar .fc-toolbar-chunk > .fc-button {
-    border-top-right-radius: 999px;
-    border-bottom-right-radius: 999px;
-}
-
-#calendar .fc-col-header-cell-cushion {
-    padding: 0.5rem 0.25rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
+#calendar .fc-col-header-cell-cushion,
 #calendar .fc-daygrid-day-number,
 #calendar .fc-timegrid-slot-label,
 #calendar .fc-list-event-time {
@@ -507,31 +390,13 @@ select.form-control option {
 }
 
 #calendar .fc-day-other .fc-daygrid-day-number {
-    opacity: 0.45;
+    opacity: 0.5;
 }
 
 #calendar .fc-list-day-cushion {
     color: var(--text);
-    background: var(--fc-neutral-bg-color);
 }
 
 #calendar .fc-list-event:hover td {
     background: var(--fc-list-event-hover-bg-color);
-}
-
-#calendar .fc-event-title {
-    font-weight: 600;
-}
-
-#calendar .fc-scrollgrid,
-#calendar .fc-list {
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-    }
 }

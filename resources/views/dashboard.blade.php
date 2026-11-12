@@ -98,7 +98,11 @@
                     @if(config('app.db4scw_end_functions_javascript'))
                     <button class="btn btn-danger" onclick="showConfirmEndActivationModal({{ $activation->id }})">End Activation</button>
                     @else
-                    <a href="/end_activation/{{ $activation->id }}" style="text-align: right;"><button class="btn btn-danger">End Activation</button></a>
+                    <form method="post" action="/end_activation" style="display: inline;">
+                        @csrf
+                        <input type="hidden" name="activationId" value="{{ $activation->id }}">
+                        <button type="submit" class="btn btn-danger">End Activation</button>
+                    </form>
                     @endif
                 </div>
                 

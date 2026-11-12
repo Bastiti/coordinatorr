@@ -25,7 +25,6 @@ Route::get('/', [ActivationController::class, 'index'])->name('home');
 
 //Activation handling
 Route::post('/add_activation', [ActivationController::class, 'add'])->name('add');
-Route::get('/end_activation/{activation:id}', [ActivationController::class, 'end'])->name('end');
 Route::post('/end_activation', [ActivationController::class, 'endmodal'])->name('endmodal');
 
 //View planned activations

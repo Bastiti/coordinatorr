@@ -1,11 +1,15 @@
 <!-- FullCalendar view of all upcoming planned activations -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+<style>
+    /* let the toolbar wrap instead of overflowing on narrow screens */
+    #calendar .fc-header-toolbar { flex-wrap: wrap; gap: 0.5rem; }
+</style>
 <div id="calendar"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
+        initialView: window.innerWidth < 768 ? 'listMonth' : 'timeGridWeek', // list is readable on phones
         headerToolbar: { // month view shows multi-day activations as one bar
             left: 'prev,next today',
             center: 'title',

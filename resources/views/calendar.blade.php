@@ -10,8 +10,6 @@
             <h1>Calendar:</h1>
             <div style="text-align: center"><a href="/planned_activations"><button class="btn btn-primary">Back to planned activations</button></a></div>
             <div id="calendar"></div>
-            <script src='fullcalendar/core/index.global.js'></script>
-            <script src='fullcalendar/core/locales-all.global.js'></script>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');

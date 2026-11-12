@@ -105,7 +105,11 @@
                     @if(config('app.db4scw_end_functions_javascript'))
                     <button class="btn btn-danger" onclick="showConfirmDeleteActivationModal({{ $activation->id }})">Delete Planned Activation</button>
                     @else
-                    <a href="/planned_activation/{{ $activation->id }}/delete" style="text-align: right;"><button class="btn btn-danger">Delete Planned Activation</button></a>
+                    <form method="post" action="/planned_activation/delete" style="display: inline;">
+                        @csrf
+                        <input type="hidden" name="plannedactivationId" value="{{ $activation->id }}">
+                        <button type="submit" class="btn btn-danger">Delete Planned Activation</button>
+                    </form>
                     @endif
                 </div>
                 

@@ -35,7 +35,6 @@ Route::get('/planned_activations/export', [PlannedActivationController::class, '
 
 //Planned activation handling
 Route::post('/add_planned_activation', [PlannedActivationController::class, 'add'])->name('add_planned_activation');
-Route::get('/planned_activation/{plannedactivation:id}/delete', [PlannedActivationController::class, 'remove'])->name('delete_planned_activation');
 Route::post('/planned_activation/delete', [PlannedActivationController::class, 'removemodal'])->name('delete_planned_activation_modal');
 
 //QRZ IFrame Integration

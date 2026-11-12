@@ -57,7 +57,7 @@
         </div>
         @if($current_activations->count() > 0)
         <h3 class="text-center mb-4" style="margin-top: 30px;">Current activations:</h3>
-        <div style="margin-bottom: 80px;">
+        <div>
             @foreach($current_activations as $activation)
             <div class="container mt-5 section">
                 <table class="table table-bordered table-hover table-dark" style="margin-bottom: 5px;">
@@ -109,11 +109,11 @@
             </div>
             @endforeach
         </div>
-        @else
-        <div style="margin-bottom: 80px;">
-        <!-- Dummy Diff als Abstandshalter für Mobile Landscape -->
-        </div>
         @endif
+        <h3 class="text-center mb-4" style="margin-top: 30px;">Planned activations:</h3>
+        <div class="container" style="margin-bottom: 80px;">
+            <x-calendar />
+        </div>
         <!-- Modal dialog to confirm ending of activation -->
         <div class="modal fade" id="confirmEndofActivationModal" tabindex="-1" role="dialog" aria-labelledby="confirmEndofActivationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dark" role="document">

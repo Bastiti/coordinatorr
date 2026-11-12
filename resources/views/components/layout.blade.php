@@ -61,14 +61,6 @@
             @endif
         </nav>
 
-        @if(!db4scw_has_activator_access() and !request()->routeIs('access'))
-        <div class="container mt-4">
-            <div class="notice">
-                Read-only mode. <a href="/access">Enter the event access code</a> to log or plan activations.
-            </div>
-        </div>
-        @endif
-
         <!-- Alerts -->
         @if(session()->has('danger'))
         <div class="bottom-right-alert">

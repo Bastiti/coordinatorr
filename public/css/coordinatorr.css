@@ -43,8 +43,6 @@
     --table-border: rgba(255, 255, 255, 0.1);
 
     --toast-bg: #1f2329;
-    --notice-bg: rgba(23, 162, 184, 0.15);
-    --notice-border: rgba(23, 162, 184, 0.45);
     --link: #8fd3e0;
 
     --fc-today: rgba(255, 220, 40, 0.12);
@@ -151,18 +149,6 @@ button.navbar-link {
 .container > h1 {
     margin-bottom: 1rem;
     text-align: center;
-}
-
-.notice {
-    padding: 0.75rem 1rem;
-    text-align: center;
-    background: var(--notice-bg);
-    border: 1px solid var(--notice-border);
-    border-radius: var(--radius);
-}
-
-.notice a {
-    font-weight: 600;
 }
 
 /* Forms */

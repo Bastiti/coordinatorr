@@ -3,7 +3,7 @@
 .env
 .env.*
 !.env.example
-coordinatorr.env
+coordinatorr.env*
 vendor
 node_modules
 storage/logs/*

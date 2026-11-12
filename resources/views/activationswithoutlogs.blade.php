@@ -29,7 +29,12 @@
                             @if($appmode != 'SINGLEOP')
                             <td>{{ $activation->band_id == null ? '' : $activation->band->band }}</td>
                             @endif
-                            <td><a href="/activation/{{ $activation->id }}/logreceived"><button class="btn btn-primary">Log received</button></a></td>
+                            <td>
+                                <form method="post" action="/activation/{{ $activation->id }}/logreceived" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Log received</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

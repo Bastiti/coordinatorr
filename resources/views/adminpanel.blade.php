@@ -60,11 +60,20 @@
                         <tr>
                             <td>{{ $activator->call }}</td>
                             <td style="text-align: center;">
-                                <a href="/activator/{{ $activator->call }}/remove"><button class="btn btn-danger">Remove Activator</button></a>
+                                <form method="post" action="/activator/{{ $activator->call }}/remove" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Remove Activator</button>
+                                </form>
                                 @if($activator->locked)
-                                <a href="/activator/{{ $activator->call }}/lock"><button class="btn btn-success">Unlock Activator</button></a>
+                                <form method="post" action="/activator/{{ $activator->call }}/lock" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Unlock Activator</button>
+                                </form>
                                 @else
-                                <a href="/activator/{{ $activator->call }}/lock"><button class="btn btn-warning">Lock Activator</button></a>
+                                <form method="post" action="/activator/{{ $activator->call }}/lock" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">Lock Activator</button>
+                                </form>
                                 @endif
                             </td>
                         </tr>
@@ -88,11 +97,20 @@
                         <tr>
                             <td>{{ $eventcall->call }}</td>
                             <td style="text-align: center;">
-                                <a href="/callsign/{{ $eventcall->call }}/remove"><button class="btn btn-danger">Remove Eventcallsign</button></a>
+                                <form method="post" action="/callsign/{{ $eventcall->call }}/remove" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Remove Eventcallsign</button>
+                                </form>
                                 @if($eventcall->hidden)
-                                <a href="/callsign/{{ $eventcall->call }}/hide"><button class="btn btn-success">Reveal Eventcallsign</button></a>
+                                <form method="post" action="/callsign/{{ $eventcall->call }}/hide" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Reveal Eventcallsign</button>
+                                </form>
                                 @else
-                                <a href="/callsign/{{ $eventcall->call }}/hide"><button class="btn btn-warning">Hide Eventcallsign</button></a>
+                                <form method="post" action="/callsign/{{ $eventcall->call }}/hide" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">Hide Eventcallsign</button>
+                                </form>
                                 @endif
                             </td>
                         </tr>

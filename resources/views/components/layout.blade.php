@@ -112,7 +112,10 @@
                 @if(auth()->check())
                 <a class="nav-link navbar-link" href="/admin">Adminpanel</a>
                 <a class="nav-link navbar-link" href="/activations/open">Open Activations</a>
-                <a class="nav-link navbar-link" href="/logout">Logout</a>
+                <form method="post" action="/logout" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="nav-link navbar-link" style="background: none; border: 0; cursor: pointer;">Logout</button>
+                </form>
                 @endif
                 <a class="nav-link navbar-link" href="/planned_activations">Planned Activations</a>
             </div>

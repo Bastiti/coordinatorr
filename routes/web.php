@@ -49,27 +49,27 @@ Route::get('/login', function() { return redirect('/'); })->name('login');
 Route::middleware('auth')->group(function () { 
 
     //only logged in users can logout
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');   
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');   
 
     //Adminpanel
     Route::get('/admin', [AdminpanelController::class, 'index'])->name('adminpanel');
 
     //Activator handling
     Route::post('/admin/add_activator', [ActivatorController::class, 'create']);
-    Route::get('/activator/{activator:call}/remove', [ActivatorController::class, 'destroy']);
-    Route::get('/activator/{activator:call}/lock', [ActivatorController::class, 'lock']);
+    Route::post('/activator/{activator:call}/remove', [ActivatorController::class, 'destroy']);
+    Route::post('/activator/{activator:call}/lock', [ActivatorController::class, 'lock']);
     
     //Callsign handling
     Route::post('/admin/add_callsign', [CallsignController::class, 'create']);
-    Route::get('/callsign/{callsign:call}/remove', [CallsignController::class, 'destroy']);
-    Route::get('/callsign/{callsign:call}/hide', [CallsignController::class, 'hide']);
+    Route::post('/callsign/{callsign:call}/remove', [CallsignController::class, 'destroy']);
+    Route::post('/callsign/{callsign:call}/hide', [CallsignController::class, 'hide']);
 
     //Mode handling
     Route::post('/admin/switch_mode', [AdminpanelController::class, 'switchmode']);
 
     //log handling
     Route::get('/activations/open', [ActivationController::class, 'showopen'])->name('activationswithoutlogs');
-    Route::get('/activation/{activation:id}/logreceived', [ActivationController::class, 'receivelog']);
+    Route::post('/activation/{activation:id}/logreceived', [ActivationController::class, 'receivelog']);
 
 });
 

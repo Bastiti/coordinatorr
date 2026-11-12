@@ -25,8 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ActivationController::class, 'index'])->name('home');
 
 //Activation handling
-Route::post('/add_activation', [ActivationController::class, 'add'])->name('add')->middleware('activatoraccess');
-Route::post('/end_activation', [ActivationController::class, 'endmodal'])->name('endmodal')->middleware('activatoraccess');
+Route::post('/add_activation', [ActivationController::class, 'add'])->name('add')->middleware(['activatoraccess', 'throttle:30,1']);
+Route::post('/end_activation', [ActivationController::class, 'endmodal'])->name('endmodal')->middleware(['activatoraccess', 'throttle:30,1']);
 
 //View planned activations
 Route::get('/planned_activations', [PlannedActivationController::class, 'index'])->name('planned_activations');
@@ -34,8 +34,8 @@ Route::get('/planned_activations/calendar', [PlannedActivationController::class,
 Route::get('/planned_activations/export', [PlannedActivationController::class, 'export_for_calendar'])->name('show_calendar_view');
 
 //Planned activation handling
-Route::post('/add_planned_activation', [PlannedActivationController::class, 'add'])->name('add_planned_activation')->middleware('activatoraccess');
-Route::post('/planned_activation/delete', [PlannedActivationController::class, 'removemodal'])->name('delete_planned_activation_modal')->middleware('activatoraccess');
+Route::post('/add_planned_activation', [PlannedActivationController::class, 'add'])->name('add_planned_activation')->middleware(['activatoraccess', 'throttle:30,1']);
+Route::post('/planned_activation/delete', [PlannedActivationController::class, 'removemodal'])->name('delete_planned_activation_modal')->middleware(['activatoraccess', 'throttle:30,1']);
 
 //Event access code for activators
 Route::get('/access', [AccessController::class, 'show'])->name('access');
@@ -79,4 +79,4 @@ Route::middleware('auth')->group(function () {
 });
 
 //Hamalert integration
-Route::post('/hamalertreceiver', [HamalertController::class, 'receive'])->name('hamalertreceiver')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::post('/hamalertreceiver', [HamalertController::class, 'receive'])->name('hamalertreceiver')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])->middleware('throttle:60,1');
